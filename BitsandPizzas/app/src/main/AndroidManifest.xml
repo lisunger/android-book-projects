@@ -19,7 +19,8 @@
 
         <activity
             android:name=".OrderActivity"
-            android:label="@string/create_order"></activity>
+            android:label="@string/create_order"
+            android:parentActivityName=".MainActivity"/>
     </application>
 
 </manifest>
