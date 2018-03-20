@@ -20,33 +20,47 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // викаме супер
         super.onCreate(savedInstanceState);
+
+        //задаваме си layout
         setContentView(R.layout.activity_main);
 
+        // намираме си toolbar и го задаваме като настоящия action bar, иначе няма да работи,
+        // въпреки че го има в лейаута
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // намираме си pager, който се намира под лентата и в него се визуализира по 1 фрагмент
         SectionsPagerAdapter pagerAdapter =
                 new SectionsPagerAdapter(getSupportFragmentManager());
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(pagerAdapter);
 
+        // намираме си табовете от лейаута и
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(pager);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // надуваме с помпата лейаут за меню
+        // пише се тук, защото onCreate вече е минал и е създал основния лейаут и е задал toolbar
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        // намираме си конкретна опция и ѝ добавяме сенекъв actionProvider по избор
         MenuItem menuItem = menu.findItem(R.id.action_share);
         shareActionProvider =
                 (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
         setShareActionIntent("Want to join me for pizza?");
+
+        // връщаме супер
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // вече се е създал и лейаут и меню и това се вика при кликване на опция от менюто
         switch (item.getItemId()) {
             case R.id.action_create_order:
                 Intent intent = new Intent(this, OrderActivity.class);
